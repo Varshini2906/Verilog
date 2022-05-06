@@ -1,0 +1,46 @@
+//Carry lookahead adder -8bit inputs
+
+module CLA_8bit(s,cout,a,b,cin);
+output [7:0]s;
+output cout;
+input [7:0]a,b;
+input cin;
+wire [7:0]p,g;
+wire [7:1]c;
+
+PFA p1(p[0],s[0],g[0],a[0],b[0],cin);
+assign c[1]=g[0]|(p[0]&g[0]);
+
+PFA p2(p[1],s[1],g[1],a[1],b[1],c[1]);
+assign c[2]=g[1]|(p[1]& c[1]);
+
+PFA p3(p[2],s[2],g[2],a[2],b[2],c[2]);
+assign c[3]=g[2]|(p[2]& c[2]);
+
+PFA p4(p[3],s[3],g[3],a[3],b[3],c[3]);
+assign c[4]=g[3]|(p[3]& c[3]);
+
+PFA p5(p[4],s[4],g[4],a[4],b[4],c[4]);
+assign c[5]=g[4]|(p[4]& c[4]);
+
+PFA p6(p[5],s[5],g[5],a[5],b[5],c[5]);
+assign c[6]=g[5]|(p[5]& c[5]);
+
+PFA p7(p[6],s[6],g[6],a[6],b[6],c[6]);
+assign c[7]=g[6]|(p[6]& c[6]);
+
+PFA p8(p[7],s[7],g[7],a[7],b[7],c[7]);
+assign cout=g[7]|(p[7]& c[7]);
+
+
+endmodule
+
+//Partial Full adder code
+
+//module PFA(output pi,si,gi,input ai,bi,ci);
+//wire pi2;
+//xor (pi,ai,bi);
+//xor (pi2,ai,bi);
+//xor (si,pi2,ci);
+//and (gi,ai,bi);
+//endmodule
